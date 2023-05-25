@@ -1,7 +1,9 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
 const logger = require("morgan");
+
+const mongoose = require("mongoose");
+const { DB_HOST } = require("./config.js");
 
 const productsRouter = require("./routes/api/products");
 const shopsRouter = require("./routes/api/shops");
@@ -9,8 +11,6 @@ const ordersRouter = require("./routes/api/orders");
 
 const app = express();
 
-const DB_HOST =
-	"mongodb+srv://daryark:jEMUE9bPRjVTqeRg@cluster0.gzspade.mongodb.net/food_delivery?retryWrites=true&w=majority";
 mongoose
 	.connect(DB_HOST)
 	.then(console.log("Database connected"))
