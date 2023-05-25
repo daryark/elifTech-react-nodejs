@@ -3,6 +3,7 @@ const path = require("path");
 
 const ordersPath = path.join(__dirname, "./orders.json");
 const productsPath = path.join(__dirname, "./products.json");
+const shopsPath = path.join(__dirname, "./shops.json");
 
 //-----------products-----------
 const getProducts = async () => {
@@ -29,9 +30,15 @@ const createOrder = async (body) => {
 	return newOrder;
 };
 
+//-----------shops-----------
+const getShops = async () => {
+	return JSON.parse(await fs.readFile(shopsPath));
+};
+
 module.exports = {
 	getProducts,
 	getProductsByShopId,
 	getOrders,
 	createOrder,
+	getShops,
 };

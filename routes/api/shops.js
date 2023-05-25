@@ -4,13 +4,23 @@
 const express = require("express");
 const router = express.Router();
 
-const shops = require("../../model/shops");
+const { NotFound } = require("http-errors");
+const operations = require("../../model");
 
-router.get("/", (req, res) => {
-	res.json({
-		data: { result: shops },
-		code: 200,
-	});
+router.get("/", async (_, res, next) => {
+	try {
+		const shops = await operations.getShops();
+		if (!shops) {
+			throw new NotFound();
+		}
+		res.json({
+			data: { result: shops },
+			code: 200,
+			status: "success",
+		});
+	} catch (error) {
+		next(error);
+	}
 });
 
 router.get("/:id", (req, res) => {
