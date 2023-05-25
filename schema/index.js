@@ -1,10 +1,10 @@
 const Joi = require("joi");
-const phonePattern = /\+?\d{0,2}\s?-?\(?\d{3}\)?\s?-?\d{3}(\s?-?\d{2}){2}/g;
+const phonePattern = /^\+?\d{0,2}\s?-?\(?\d{3}\)?\s?-?\d{3}(\s?-?\d{2}){2}$/;
 
 const orderSchema = Joi.object({
 	name: Joi.string().alphanum(),
 	email: Joi.string().email().required(),
-	phone: Joi.string().pattern(new RegExp(phonePattern)).required(),
+	phone: Joi.string().pattern(phonePattern).required(),
 	address: Joi.string().required(),
 	order: Joi.array()
 		.min(1)
