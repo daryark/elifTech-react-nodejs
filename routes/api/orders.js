@@ -1,26 +1,37 @@
 const express = require("express");
 const router = express.Router();
 
-const orders = require("../../db/orders");
+const { NotFound } = require("http-errors");
+const operations = require("../../model");
 
-router.get("/", (req, res) => {
-	res.json({
-		data: { result: orders },
-		code: 200,
-	});
+router.get("/", async (_, res, next) => {
+	try {
+		const orders = await operations.getOrders();
+		if (!orders) {
+			throw new NotFound();
+		}
+		res.json({
+			data: { result: orders },
+			code: 200,
+			status: "success",
+		});
+	} catch (error) {
+		next(error);
+	}
 });
 
-router.post("/", (req, res) => {
-	const newOrder = { ...req.body, id: "id" };
-	orders.push(newOrder);
-	// if (!result) {
-	// 	res.status(404).json({ code: 404, status: "error", message: `Shop with id:${id} not found` });
-	// }
-	res.status(201).json({
-		data: { result: newOrder },
-		code: 201,
-		status: "success",
-	});
+router.post("/", async (req, res, next) => {
+	try {
+		const createdOrder = await operations.createOrder(req.body);
+
+		res.status(201).json({
+			data: { result: createdOrder },
+			code: 201,
+			status: "success",
+		});
+	} catch (error) {
+		next(error);
+	}
 });
 
 module.exports = router;
