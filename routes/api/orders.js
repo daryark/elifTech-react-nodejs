@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { NotFound } = require("http-errors");
+const { NotFound, BadRequest } = require("http-errors");
 const operations = require("../../model");
 const orderSchema = require("../../schema");
 
@@ -24,7 +24,8 @@ router.get("/", async (_, res, next) => {
 router.post("/", async (req, res, next) => {
 	try {
 		const { error } = orderSchema.validate(req.body);
-		console.log(orderSchema.validate(req.body));
+		if (error) throw new BadRequest(error.message);
+
 		const createdOrder = await operations.createOrder(req.body);
 
 		res.status(201).json({

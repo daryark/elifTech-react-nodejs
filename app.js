@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
 const logger = require("morgan");
 
@@ -7,6 +8,16 @@ const shopsRouter = require("./routes/api/shops");
 const ordersRouter = require("./routes/api/orders");
 
 const app = express();
+
+const DB_HOST =
+	"mongodb+srv://daryark:jEMUE9bPRjVTqeRg@cluster0.gzspade.mongodb.net/food_delivery?retryWrites=true&w=majority";
+mongoose
+	.connect(DB_HOST)
+	.then(console.log("Database connected"))
+	.catch((err) => {
+		console.log(err.message);
+		process.exit(1);
+	});
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
@@ -30,3 +41,6 @@ app.use((err, req, res, next) => {
 app.listen(3001, () => {
 	console.log("App listening on port 3001!");
 });
+
+//jEMUE9bPRjVTqeRg
+//mongodb+srv://daryark:<password>@cluster0.gzspade.mongodb.net/
