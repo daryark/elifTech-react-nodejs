@@ -10,11 +10,8 @@ router.get("/", async (_, res, next) => {
 		if (!products) {
 			throw new NotFound();
 		}
-		res.json({
-			data: { result: products },
-			code: 200,
-			status: "success",
-		});
+		console.log("its products");
+		res.json({ result: products });
 	} catch (error) {
 		next(error);
 	}
