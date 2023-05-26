@@ -5,11 +5,11 @@ const express = require("express");
 const router = express.Router();
 
 const { NotFound } = require("http-errors");
-const operations = require("../../model");
+const { Shop } = require("../../models");
 
 router.get("/", async (_, res, next) => {
 	try {
-		const shops = await operations.getShops();
+		const shops = await Shop.find({});
 		if (!shops) {
 			throw new NotFound();
 		}

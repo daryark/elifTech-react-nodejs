@@ -2,12 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 const { NotFound, BadRequest } = require("http-errors");
-const operations = require("../../model");
-const orderSchema = require("../../schema");
+const { joiSchema, Order } = require("../../models");
 
 router.get("/", async (_, res, next) => {
 	try {
-		const orders = await operations.getOrders();
+		const orders = await Order.find({});
 		if (!orders) {
 			throw new NotFound();
 		}
@@ -23,10 +22,10 @@ router.get("/", async (_, res, next) => {
 
 router.post("/", async (req, res, next) => {
 	try {
-		const { error } = orderSchema.validate(req.body);
+		const { error } = joiSchema.validate(req.body);
 		if (error) throw new BadRequest(error.message);
 
-		const createdOrder = await operations.createOrder(req.body);
+		const createdOrder = await Order.create(req.body);
 
 		res.status(201).json({
 			data: { result: createdOrder },

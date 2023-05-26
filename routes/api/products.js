@@ -2,17 +2,18 @@ const express = require("express");
 const router = express.Router();
 
 const { NotFound } = require("http-errors");
-const operations = require("../../model");
+const { Product } = require("../../models");
 
 router.get("/", async (_, res, next) => {
 	try {
-		const products = await operations.getProducts();
+		const products = await Product.find({});
 		if (!products) {
 			throw new NotFound();
 		}
 		res.json({
 			data: { result: products },
 			code: 200,
+			status: "success",
 		});
 	} catch (error) {
 		next(error);
@@ -22,9 +23,9 @@ router.get("/", async (_, res, next) => {
 router.get("/:id", async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		const shopProducts = await operations.getProductsByShopId(id);
+		const shopProducts = await Product.find({ _id: id });
 
-		if (!shopProducts) {
+		if (!shopProducts.length) {
 			throw new NotFound(`Shop with id:${id} not found`);
 		}
 		res.json({
