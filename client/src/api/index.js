@@ -7,3 +7,9 @@ export const getProducts = async () => {
 
 	return data;
 };
+
+export const getShops = async () => {
+	const { data } = await axios.get("/api/shops");
+
+	return data;
+};

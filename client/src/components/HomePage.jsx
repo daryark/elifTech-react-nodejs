@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { getProducts } from "../api/index";
+import { getProducts, getShops } from "../api/index";
 import { Container, Content, Description, List, Price } from "./App.styled";
 
 export default function HomePage() {
 	const [products, setProducts] = useState([]);
+	const [shops, setShops] = useState([]);
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(false);
 
@@ -23,11 +24,29 @@ export default function HomePage() {
 		getProductsAll();
 	}, []);
 
+	useEffect(() => {
+		async function getShopsAll() {
+			try {
+				setLoading(true);
+				const { result } = await getShops();
+				setShops(result);
+				setError(null);
+			} catch (error) {
+				setError(error.message);
+			} finally {
+				setLoading(false);
+			}
+		}
+		getShopsAll();
+	}, []);
+
 	return (
 		<Container>
 			{error !== null && <p>{error.message}</p>}
 			{loading && <p>Loader</p>}
-			<aside>its shops list alooot shops</aside>
+			<aside>
+				<List>{Boolean(shops) && shops?.map(({ name, _id }) => <li key={_id}>{name}</li>)}</List>
+			</aside>
 			<List>
 				{Boolean(products) &&
 					products?.map(({ name, price, _id, image }) => (

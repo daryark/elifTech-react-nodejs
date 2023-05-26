@@ -13,11 +13,7 @@ router.get("/", async (_, res, next) => {
 		if (!shops) {
 			throw new NotFound();
 		}
-		res.json({
-			data: { result: shops },
-			code: 200,
-			status: "success",
-		});
+		res.json({ result: shops });
 	} catch (error) {
 		next(error);
 	}
