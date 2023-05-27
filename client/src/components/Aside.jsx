@@ -50,7 +50,7 @@ function Aside() {
 				{Boolean(shops) &&
 					shops?.map(({ name, _id }) => (
 						<li key={_id} onClick={handleClick}>
-							<a href="./">{name}</a>
+							{name}
 						</li>
 					))}
 			</ul>

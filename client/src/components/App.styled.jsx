@@ -35,9 +35,8 @@ export const AsideStyled = styled.aside`
 		font-size: 18px;
 	}
 
-	& li a {
-		display: inline-block;
-		padding-bottom: 3px;
+	& li {
+		padding-bottom: 5px;
 
 		&:hover,
 		:focus {
@@ -71,13 +70,13 @@ export const List = styled.ul`
 	}
 `;
 
-export const Content = styled.a`
+export const Content = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
 	flex-grow: 1;
-	padding: 20px 10px;
+	padding: 20px 15px;
 	&:hover,
 	:focus {
 		outline: 3px solid #b7aeed;
@@ -89,9 +88,12 @@ export const Content = styled.a`
 export const Description = styled.div`
 	display: flex;
 	justify-content: space-between;
+	align-items: flex-end;
 	gap: 10px;
+	min-width: 100%;
 `;
 
 export const Price = styled.p`
 	font-weight: 600;
+	white-space: nowrap;
 `;

@@ -35,7 +35,7 @@ export default function HomePage() {
 				{Boolean(products) &&
 					products?.map(({ name, price, _id, image }) => (
 						<li key={_id}>
-							<Content href="./">
+							<Content onClick={() => console.log(`click on item ${name}`)}>
 								{image && <img src={image} alt={name} style={{ width: "200px" }} />}
 								<Description>
 									<p>{name}</p>
