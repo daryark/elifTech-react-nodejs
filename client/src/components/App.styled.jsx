@@ -25,10 +25,15 @@ export const Nav = styled.nav`
 	}
 `;
 
-export const Aside = styled.aside`
-	width: 30vw;
+export const AsideStyled = styled.aside`
+	width: 20vw;
 	font-weight: 700;
 	font-size: 24px;
+
+	@media screen and (max-width: 800px) {
+		width: 30vw;
+		font-size: 18px;
+	}
 
 	& li a {
 		display: inline-block;
@@ -50,8 +55,17 @@ export const List = styled.ul`
 	gap: 5px;
 	margin-left: 20px;
 
+	@media screen and (max-width: 800px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	@media screen and (max-width: 500px) {
+		grid-template-columns: 1fr;
+	}
+
 	& li {
 		display: flex;
+		min-height: 250px;
+		min-width: 170px;
 		border-radius: 5px;
 		background-color: white;
 	}
