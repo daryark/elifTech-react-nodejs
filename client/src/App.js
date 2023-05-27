@@ -1,19 +1,8 @@
-import logo from "./logo.svg";
+import React from "react";
+import Navigation from "./components/Navigation";
 
 function App() {
-	return (
-		<div>
-			<header>
-				<img src={logo} alt="logo" />
-				<p>
-					Edit <code>src/App.js</code> and hello.
-				</p>
-				<a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-					Learn React with Dasha
-				</a>
-			</header>
-		</div>
-	);
+	return <Navigation />;
 }
 
 export default App;
