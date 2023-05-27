@@ -15,4 +15,3 @@ root.render(
 );
 
 console.log("say hello");
-reportWebVitals();
