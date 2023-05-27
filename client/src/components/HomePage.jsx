@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getProducts, getShops } from "../api/index";
-import { Container, Content, Description, List, Price } from "./App.styled";
+import { Aside, Container, Content, Description, List, Price } from "./App.styled";
 
 export default function HomePage() {
 	const [products, setProducts] = useState([]);
@@ -44,14 +44,21 @@ export default function HomePage() {
 		<Container>
 			{error !== null && <p>{error.message}</p>}
 			{loading && <p>Loader</p>}
-			<aside>
-				<List>{Boolean(shops) && shops?.map(({ name, _id }) => <li key={_id}>{name}</li>)}</List>
-			</aside>
+			<Aside>
+				<ul>
+					{Boolean(shops) &&
+						shops?.map(({ name, _id }) => (
+							<li key={_id}>
+								<a href="./">{name}</a>
+							</li>
+						))}
+				</ul>
+			</Aside>
 			<List>
 				{Boolean(products) &&
 					products?.map(({ name, price, _id, image }) => (
 						<li key={_id}>
-							<Content>
+							<Content href="./">
 								{image && <img src={image} alt={name} style={{ width: "200px" }} />}
 								<Description>
 									<p>{name}</p>

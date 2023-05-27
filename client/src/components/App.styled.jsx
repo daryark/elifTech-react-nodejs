@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 export const Nav = styled.nav`
 	display: flex;
-	gap: 15px;
+
 	background-color: #f0edfd;
 	border-bottom: 2px solid #3f2f9e;
 
@@ -17,22 +17,41 @@ export const Nav = styled.nav`
 		font-size: 20px;
 		font-weight: 600;
 
-		&:hover {
+		&:hover,
+		:focus {
 			background-color: #b7aeed;
+			outline: none;
 		}
+	}
+`;
+
+export const Aside = styled.aside`
+	width: 30vw;
+	font-weight: 700;
+	font-size: 24px;
+
+	& li a {
+		display: inline-block;
+		padding-bottom: 3px;
+
+		&:hover,
+		:focus {
+			color: #3f2f9e;
+		}
+	}
+	& li:not(:last-child) {
+		border-bottom: 2px solid #3f2f9e;
 	}
 `;
 
 export const List = styled.ul`
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	gap: 3px;
+	gap: 5px;
 	margin-left: 20px;
 
 	& li {
 		display: flex;
-		padding: 20px 10px;
-		margin-bottom: 5px;
 		border-radius: 5px;
 		background-color: white;
 	}
@@ -44,6 +63,13 @@ export const Content = styled.a`
 	justify-content: space-between;
 	align-items: center;
 	flex-grow: 1;
+	padding: 20px 10px;
+	&:hover,
+	:focus {
+		outline: 3px solid #b7aeed;
+		border-radius: 2px;
+		outline-offset: -2px;
+	}
 `;
 
 export const Description = styled.div`
